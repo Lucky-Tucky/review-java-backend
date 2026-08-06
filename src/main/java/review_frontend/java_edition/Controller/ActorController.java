@@ -32,7 +32,7 @@ public class ActorController {
                 );
     }
 
-    @DeleteMapping()
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteActor(@PathVariable int id){
         try {
             return new ResponseEntity<>("Delete Actor", HttpStatus.OK);
