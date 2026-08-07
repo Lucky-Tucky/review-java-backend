@@ -12,7 +12,7 @@ import review_frontend.java_edition.Service.ActorService;
 
 import java.util.concurrent.CompletableFuture;
 
-@Controller
+@RestController
 @RequestMapping("/actor")
 public class ActorController {
 

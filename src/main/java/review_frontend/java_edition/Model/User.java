@@ -35,6 +35,7 @@ public class User {
     @Column(nullable = false,updatable = false)
     private LocalDateTime joinedOn;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role = Role.USER;
