@@ -2,13 +2,17 @@ package review_frontend.java_edition.Model;
 
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
+import review_frontend.java_edition.Enum.Role;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Builder
+@Getter
 @Entity
+@Table(name="users")
 public class User {
 
     @Id
@@ -30,5 +34,9 @@ public class User {
     @CreationTimestamp
     @Column(nullable = false,updatable = false)
     private LocalDateTime joinedOn;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role = Role.USER;
 
 }
