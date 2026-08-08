@@ -1,5 +1,6 @@
 package review_frontend.java_edition.Config;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -32,5 +33,14 @@ public class AuthUtils {
                 .expiration(new Date(System.currentTimeMillis()+1000*60*100))
                 .signWith(getSigningKey())
                 .compact();
+    }
+
+    public String getJwtUserName(String token){
+        Claims claims = Jwts.parser()
+                .verifyWith(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+        return claims.getSubject();
     }
 }
