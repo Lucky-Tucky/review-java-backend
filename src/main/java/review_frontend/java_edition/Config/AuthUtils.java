@@ -5,6 +5,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import review_frontend.java_edition.Model.CustomUserDetails;
 import review_frontend.java_edition.Model.User;
 
 import javax.crypto.SecretKey;
@@ -23,7 +24,7 @@ public class AuthUtils {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateJwt(User user){
+    public String generateJwt(CustomUserDetails user){
         return Jwts.builder()
                 .subject(user.getEmail())
                 .claim("userId",user.getId())

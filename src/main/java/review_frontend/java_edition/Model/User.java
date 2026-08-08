@@ -1,14 +1,18 @@
 package review_frontend.java_edition.Model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import review_frontend.java_edition.Enum.Role;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 @Entity

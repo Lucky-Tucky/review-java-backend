@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import review_frontend.java_edition.Model.CustomUserDetails;
 import review_frontend.java_edition.Model.User;
 import review_frontend.java_edition.Repository.UserRepository;
 
@@ -15,13 +16,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public CustomUserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
 
-        return org.springframework.security.core.userdetails.User.withUsername(user.getName())
-                .password(user.getPassword())
-                .roles(user.getRole().toString())
-                .build();
+        return new CustomUserDetails(user);
     }
 }
