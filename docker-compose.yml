@@ -1,0 +1,16 @@
+services:
+
+  email-service:
+    build: .
+    container_name: email-service
+    restart: unless-stopped
+
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9093
+
+    networks:
+      - kafka-network
+
+networks:
+  kafka-network:
+    external: true
