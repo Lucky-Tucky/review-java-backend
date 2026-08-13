@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import review_frontend.java_edition.Config.AuthUtils;
+import review_frontend.java_edition.Config.KafkaProducer;
 import review_frontend.java_edition.DTO.AuthResponseDto;
 import review_frontend.java_edition.DTO.LoginRequestDto;
 import review_frontend.java_edition.DTO.SignUpRequestDto;
@@ -26,6 +27,9 @@ public class AuthService {
 
     @Autowired
     private AuthUtils authUtils;
+
+    @Autowired
+    private KafkaProducer kafkaProducer;
 
     private final AuthenticationManager authenticationManager;
 
@@ -54,6 +58,9 @@ public class AuthService {
                 if(jwt_token==null || jwt_token.trim().length()<=0 ||  created_user == null){
                     throw new Exception();
                 }
+
+                kafkaProducer.topicProducer("email-topic","Dummy Body! "+created_user.getName());
+
                 return new AuthResponseDto(created_user.getName(),jwt_token);
         }catch (Exception e){
             throw e;
